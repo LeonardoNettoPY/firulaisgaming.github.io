@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirulaisGamingOficial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .stars div {
+            position: absolute;
+            background: white;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            animation: moveStar 15s linear infinite;
+        }
+        @keyframes moveStar {
+            from {
+                transform: translateY(0) translateX(0);
+            }
+            to {
+                transform: translateY(100vh) translateX(calc(50vw - 50%));
+            }
+        }
+        .sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .sparkles div {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 80%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: sparkle 5s linear infinite;
+        }
+        @keyframes sparkle {
+            from {
+                opacity: 0;
+                transform: scale(0) translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) translateY(-50px);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0) translateY(-100px);
+            }
+        }
+        header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+        }
+        .menu-button {
+            display: inline-block;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        .menu-button span {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background: white;
+            margin: 5px auto;
+            transition: 0.3s;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            position: absolute;
+            top: 70px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.3s ease-in-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 10px;
+            padding: 10px 20px;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .menu a.discord {
+            background: #5865F2;
+            color: yellow;
+            font-weight: bold;
+            box-shadow: 0 0 15px #5865F2;
+        }
+        .menu a:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .menu.active {
+            display: flex;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 100px;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5em;
+            border-radius: 20px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            width: 250px;
+            text-align: center;
+            min-height: 60px;
+        }
+a.center-text {
+  display: inline-flex;           /* Convierte el <a> en un contenedor flexible */
+  justify-content: center;        /* Centra el texto horizontalmente */
+  align-items: center;            /* Centra el texto verticalmente */
+}
+
+        .buttons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: skewX(-45deg);
+            transition: 0.5s;
+        }
+        .buttons a:hover::before {
+            left: 100%;
+        }
+        .buttons a:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            font-size: 0.9em;
+        }
+        .fade-text {
+            position: relative;
+            display: inline-block;
+            max-width: 880px; /* Ajusta el ancho según tus necesidades */
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            mask-image: linear-gradient(to right, black 70%, transparent);
+            -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <!-- Generating 200 stars dynamically -->
+        <script>
+            for (let i = 0; i < 300; i++) {
+                const star = document.createElement('div');
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDuration = Math.random() * 10 + 5 + 's';
+                document.querySelector('.stars').appendChild(star);
+            }
+        </script>
+    </div>
+    <div class="sparkles">
+        <script>
+            for (let i = 0; i < 100; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.querySelector('.sparkles').appendChild(sparkle);
+            }
+        </script>
+    </div>
+
+    <header>
+        <img src="https://yt3.googleusercontent.com/7YLw1GdU429WdGKDLDMH4ZcqYmNf-BMiqn5S4RuNWre_m43tHoBnZTe4I9wWnV6r_RKCuja4=s160-c-k-c0x00ffffff-no-rj" alt="Logo FirulaisGamingOficial">
+        <h1>FirulaisGamingOficial</h1>
+
+        <p class="fade-text">
+            Hola negros, visiten mi canal o les voy a cortar las cabezas (sí las dos cabezas) (no me fune...
+        </p>
+
+<a style="color: #3374ff; text-decoration: none; font-weight: 900" href="https://www.youtube.com/@FirulaisGamingOficial/about">Ver más...</a>
+
+        <p>📧 Negocios y Patrocinios: leopydevel.contacto@gmail.com</p>
+    </header>
+
+    <div class="menu-button" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="menu">
+        <a href="https://www.youtube.com/@FirulaisGamingOficial">YouTube</a>
+        <a href="#">Instagram (no disponible aún)</a>
+        <a href="#">Twitter (no disponible aún)</a>
+        <a href="https://discord.gg/4jEBBuVzEM" class="discord">Discord</a>
+    </div>
+
+    <div class="buttons">
+        <a class="center-text" href="https://www.youtube.com/@FirulaisGamingOficial" target="_blank">YouTube</a>
+        <a class="center-text" href="https://twitch.tv" target="_blank">Instagram (no disponible aún)</a>
+        <a class="center-text" href="https://twitter.com" target="_blank">Twitter (no disponible aún)</a>
+        <a class="center-text" href="https://discord.gg/4jEBBuVzEM" class="discord" target="_blank">Discord</a>
+    </div>
+
+    <footer>
+        © 2024 FirulaisGamingOficial. Todos los Derechos reservados
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
